@@ -93,14 +93,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test:unit"
     }
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
-      "yarn lint",
-      "vue-cli-service test:unit",
-      "git add"
+      "yarn lint"
     ]
   }
 }
