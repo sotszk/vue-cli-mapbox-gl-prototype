@@ -25,7 +25,7 @@
     "package.json": [
       "yarn package-lint"
     ],
-    "src/**/*, tests/**/*": [
+    "tests/**/*.{js,ts}": [
       "yarn test:unit"
     ]
   },
