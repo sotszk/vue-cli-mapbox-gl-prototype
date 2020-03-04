@@ -19,10 +19,15 @@ export default Vue.extend({
       return this.$store.state.account.name;
     },
   },
-  beforeMount() {
-    this.$store.commit('increment');
-    console.log(this.$store.state.count);
-    this.$store.commit('account/setName', 'Sota Suzuki');
+  async beforeMount() {
+    let user;
+    try {
+      user = await this.$_fetcher.get('users/SotaSuzuki');
+    } catch (err) {
+      console.error(err);
+      return;
+    }
+    this.$store.commit('account/setName', user.name);
   },
 });
 </script>
