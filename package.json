@@ -5,16 +5,24 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:dev": "vue-cli-service build --mode development",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "inspect": "vue-cli-service inspect"
   },
   "dependencies": {
+    "@vue/composition-api": "^0.4.0",
     "core-js": "^3.6.4",
+    "dayjs": "^1.8.21",
+    "ky": "^0.18.0",
+    "tailwindcss": "^1.2.0",
     "vue": "^2.6.11",
-    "vue-router": "^3.1.5"
+    "vue-router": "^3.1.5",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.1.0",
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
@@ -41,7 +49,7 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/recommended",
       "eslint:recommended",
       "@vue/typescript/recommended",
       "@vue/prettier",
@@ -50,7 +58,10 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {},
+    "rules": {
+      "vue/no-unused-components": "warn",
+      "@typescript-eslint/no-var-requires": "off"
+    },
     "overrides": [
       {
         "files": [
@@ -65,9 +76,24 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions"
+    "last 1 version",
+    "not IE 11"
   ],
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }
