@@ -1,4 +1,4 @@
-# group-mimamori-proto
+# Vue CLI with Mapbox GL Prototype
 
 ## Project setup
 ```
