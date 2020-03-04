@@ -24,6 +24,9 @@
     ],
     "package.json": [
       "yarn package-lint"
+    ],
+    "src/**/*, test/**/*": [
+      "yarn test:unit"
     ]
   },
   "browserslist": [
