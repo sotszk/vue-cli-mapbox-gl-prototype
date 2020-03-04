@@ -3,15 +3,72 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:dev": "vue-cli-service build --mode development",
-    "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint",
     "inspect": "vue-cli-service inspect",
+    "lint": "vue-cli-service lint",
     "package-lint": "sort-package-json",
-    "package-update": "ncu -u"
+    "package-update": "ncu -u",
+    "serve": "vue-cli-service serve",
+    "test:e2e": "vue-cli-service test:e2e",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "yarn lint"
+    ],
+    "package.json": [
+      "yarn package-lint"
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "last 1 version",
+    "not IE 11"
+  ],
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2020
+    },
+    "extends": [
+      "plugin:vue/recommended",
+      "eslint:recommended",
+      "@vue/typescript/recommended",
+      "@vue/prettier",
+      "@vue/prettier/@typescript-eslint"
+    ],
+    "rules": {
+      "@typescript-eslint/no-var-requires": "off",
+      "vue/no-unused-components": "warn"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ],
+    "root": true
+  },
+  "jest": {
+    "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
   },
   "dependencies": {
     "@vue/composition-api": "^0.4.0",
@@ -43,62 +100,10 @@
     "eslint-plugin-vue": "^6.1.2",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
+    "npm-check-updates": "^4.0.3",
     "prettier": "^1.19.1",
+    "sort-package-json": "^1.40.0",
     "typescript": "~3.7.5",
     "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/recommended",
-      "eslint:recommended",
-      "@vue/typescript/recommended",
-      "@vue/prettier",
-      "@vue/prettier/@typescript-eslint"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
-    "rules": {
-      "vue/no-unused-components": "warn",
-      "@typescript-eslint/no-var-requires": "off"
-    },
-    "overrides": [
-      {
-        "files": [
-          "**/__tests__/*.{j,t}s?(x)",
-          "**/tests/unit/**/*.spec.{j,t}s?(x)"
-        ],
-        "env": {
-          "jest": true
-        }
-      }
-    ]
-  },
-  "browserslist": [
-    "> 1%",
-    "last 1 version",
-    "not IE 11"
-  ],
-  "jest": {
-    "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
-  },
-  "prettier": {
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": ["lint-staged", "yarn test:unit"]
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,vue}": [
-      "yarn lint"
-    ]
   }
 }
