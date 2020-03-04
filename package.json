@@ -25,7 +25,7 @@
     "package.json": [
       "yarn package-lint"
     ],
-    "tests/**/*.{js,ts}": [
+    "src/**/*.{js,ts,vue}, tests/**/*.{js,ts}": [
       "yarn test:unit"
     ]
   },
