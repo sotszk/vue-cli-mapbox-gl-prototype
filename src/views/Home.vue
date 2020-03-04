@@ -9,9 +9,11 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'Home',
-  data() {
+  data(): {
+    responses: any[];
+  } {
     return {
-      hoge: 'hoge',
+      responses: [],
     };
   },
   computed: {
@@ -28,6 +30,16 @@ export default Vue.extend({
       return;
     }
     this.$store.commit('account/setName', user.name);
+
+    // this.doPolling('users/SotaSuzuki');
+  },
+  methods: {
+    async doPolling(input: string) {
+      const user = await this.$_fetcher.get(input);
+      this.responses.push(user);
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      await this.doPolling(input);
+    },
   },
 });
 </script>
