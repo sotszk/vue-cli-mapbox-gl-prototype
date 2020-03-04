@@ -13,9 +13,11 @@
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged",
-    "pre-push": "yarn test:unit"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test:unit"
+    }
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
