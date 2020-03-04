@@ -1,18 +1,34 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1 class="y-account-name">I am {{ accountName }}</h1>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+<script lang="ts">
+import Vue from 'vue';
 
-export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
-};
+export default Vue.extend({
+  name: 'Home',
+  data() {
+    return {
+      hoge: 'hoge',
+    };
+  },
+  computed: {
+    accountName() {
+      return this.$store.state.account.name;
+    },
+  },
+  beforeMount() {
+    this.$store.commit('increment');
+    console.log(this.$store.state.count);
+    this.$store.commit('account/setName', 'Sota Suzuki');
+  },
+});
 </script>
+
+<style scoped>
+.y-account-name {
+  @apply text-5xl font-bold;
+}
+</style>

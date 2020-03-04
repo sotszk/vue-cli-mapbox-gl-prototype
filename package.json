@@ -9,7 +9,9 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "inspect": "vue-cli-service inspect"
+    "inspect": "vue-cli-service inspect",
+    "package-lint": "sort-package-json",
+    "package-update": "ncu -u"
   },
   "dependencies": {
     "@vue/composition-api": "^0.4.0",
@@ -39,6 +41,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.1.2",
+    "husky": "^4.2.3",
     "prettier": "^1.19.1",
     "typescript": "~3.7.5",
     "vue-template-compiler": "^2.6.11"
@@ -87,8 +90,10 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
